@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prakatheeshwaran R - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* =========================================
+           🎨 COLOUR PALETTE (Change these to customize!)
+           ========================================= */
+        :root {
+            --bg-color: #0d1117;          /* Main background color (Dark Navy) */
+            --container-bg: #161b22;      /* Inner container color (Slightly lighter dark) */
+            --text-color: #ffffff;        /* Primary text color (White) */
+            --secondary-text: #8b949e;    /* Secondary text color (Grey) */
+            --accent-color: #00d2ff;      /* Highlight color (Neon Blue) */
+            --button-danger: #e94560;     /* Download button color (Crimson Pink) */
+        }
+
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth; /* Enables smooth scrolling to sections */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .portfolio-container {
+            background-color: var(--container-bg);
+            width: 100%;
+            max-width: 1200px;
+            border-radius: 20px;
+            padding: 30px 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 60px;
+            position: sticky;
+            top: 0;
+            background: var(--container-bg);
+            padding: 15px 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 24px; font-weight: 700; }
+        .logo span { color: var(--accent-color); }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .theme-toggle { cursor: pointer; color: var(--accent-color); font-size: 20px; }
+        
+        .btn-download {
+            background-color: var(--button-danger);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+        .btn-download:hover { opacity: 0.8; }
+
+        /* --- Reusable Buttons --- */
+        .btn { padding: 10px 25px; border-radius: 5px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.3s; display: inline-block; }
+        .btn-primary { background-color: var(--accent-color); color: var(--bg-color); border: 1px solid var(--accent-color); }
+        .btn-primary:hover { background-color: transparent; color: var(--accent-color); }
+        .btn-outline { background-color: transparent; color: var(--accent-color); border: 1px solid var(--accent-color); }
+        .btn-outline:hover { background-color: var(--accent-color); color: var(--bg-color); }
+
+        /* --- Sections Common --- */
+        section { padding: 60px 0; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+        .section-title { font-size: 32px; font-weight: 700; margin-bottom: 40px; text-align: center; }
+        .section-title span { color: var(--accent-color); }
+
+        /* --- Hero Section --- */
+        .hero { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; gap: 50px; border-top: none; padding-top: 0; }
+        .hero-image-container { flex: 1; display: flex; justify-content: center; position: relative; }
+        
+        .blob-bg {
+            width: 350px; height: 350px;
+            background: linear-gradient(135deg, var(--accent-color), #3a86ff);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            position: absolute; z-index: 0;
+            animation: morph 8s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.4);
+        }
+        @keyframes morph {
+            0%, 100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            34% { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+            67% { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+        }
+        
+        .profile-img { width: 300px; height: 300px; object-fit: cover; border-radius: 50%; z-index: 1; border: 5px solid var(--container-bg); background-color: #1a2230; }
+        
+        .hero-text { flex: 1.2; }
+        .hero-text h3 { font-size: 18px; font-weight: 400; margin-bottom: 10px; }
+        .hero-text h1 { font-size: 42px; font-weight: 700; margin-bottom: 10px; }
+        .hero-text h2 { font-size: 24px; font-weight: 600; margin-bottom: 20px; }
+        .typing-text { color: var(--accent-color); }
+        .description { color: var(--secondary-text); font-size: 14px; line-height: 1.6; margin-bottom: 30px; max-width: 500px; }
+        
+        .social-icons { display: flex; gap: 15px; margin-bottom: 30px; }
+        .social-icons a { display: flex; justify-content: center; align-items: center; width: 35px; height: 35px; border: 1px solid var(--accent-color); border-radius: 5px; color: var(--accent-color); text-decoration: none; transition: all 0.3s; }
+        .social-icons a:hover { background-color: var(--accent-color); color: var(--bg-color); }
+        .action-buttons { display: flex; gap: 20px; }
+
+        /* --- Stats Section --- */
+        .stats { display: flex; justify-content: space-between; padding: 30px 0 0 0; }
+        .stat-item { display: flex; align-items: center; gap: 15px; }
+        .stat-number { font-size: 32px; font-weight: 700; color: var(--text-color); }
+        .stat-text { font-size: 12px; color: var(--secondary-text); line-height: 1.2; }
+
+        /* --- About Section --- */
+        .about-content { display: flex; gap: 40px; background: rgba(255, 255, 255, 0.02); padding: 30px; border-radius: 15px; }
+        .about-text { flex: 1.5; color: var(--secondary-text); line-height: 1.8; }
+        .about-text p { margin-bottom: 15px; font-size: 15px;}
+        .about-details { flex: 1; background: var(--bg-color); padding: 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .about-details ul { list-style: none; }
+        .about-details li { margin-bottom: 15px; color: var(--secondary-text); font-size: 14px; }
+        .about-details strong { color: var(--text-color); display: inline-block; width: 90px; }
+
+        /* --- Skills Section --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; }
+        .skill-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px 20px; border-radius: 15px; text-align: center; transition: transform 0.3s, border-color 0.3s; }
+        .skill-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .skill-card i { font-size: 40px; color: var(--accent-color); margin-bottom: 15px; }
+        .skill-card h3 { font-size: 18px; margin-bottom: 10px; }
+        .skill-card p { font-size: 13px; color: var(--secondary-text); line-height: 1.5; }
+
+        /* --- Projects Section --- */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .project-card { background: rgba(255, 255, 255, 0.02); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .project-img-placeholder { height: 180px; background: linear-gradient(45deg, #1a2230, #0d1117); display: flex; justify-content: center; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .project-img-placeholder i { font-size: 50px; color: rgba(255, 255, 255, 0.1); }
+        .project-info { padding: 25px; }
+        .project-info h3 { font-size: 20px; margin-bottom: 10px; }
+        .project-info p { font-size: 14px; color: var(--secondary-text); margin-bottom: 15px; line-height: 1.6; }
+        .tech-stack { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;}
+        .tech-stack span { font-size: 11px; background: rgba(0, 210, 255, 0.1); color: var(--accent-color); padding: 4px 10px; border-radius: 20px; }
+
+        /* --- Contact Section --- */
+        .contact-container { display: flex; gap: 50px; background: rgba(255, 255, 255, 0.02); padding: 40px; border-radius: 15px; }
+        .contact-info { flex: 1; }
+        .contact-info h3 { font-size: 24px; margin-bottom: 10px; }
+        .contact-info p { color: var(--secondary-text); margin-bottom: 30px; font-size: 14px; }
+        .contact-item { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: var(--secondary-text); }
+        .contact-item i { color: var(--accent-color); font-size: 20px; }
+        .contact-form { flex: 1.5; display: flex; flex-direction: column; gap: 20px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 15px; background: var(--bg-color); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; color: var(--text-color); font-family: 'Poppins', sans-serif; }
+        .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent-color); }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            .hero { flex-direction: column; text-align: center; }
+            .hero-text { display: flex; flex-direction: column; align-items: center; }
+            .stats { flex-wrap: wrap; gap: 20px; justify-content: center; }
+            .nav-links { display: none; }
+            .about-content, .contact-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-container">
+        <nav>
+            <div class="logo">Port<span>folio</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <i class="fas fa-moon theme-toggle"></i>
+                <a href="Prakatheeshwaran_ R_Resume.docx" download class="btn-download"><i class="fas fa-download"></i> Download CV</a>
+            </div>
+        </nav>
+
+        <section class="hero" id="home">
+            <div class="hero-image-container">
+                <div class="blob-bg"></div>
+                <img src="prakatheesh.jpg" alt="Prakatheeshwaran R" class="profile-img">
+            </div>
+
+            <div class="hero-text">
+                <h3>Hello, I'm</h3>
+                <h1>Prakatheeshwaran R</h1>
+                <h2>And I'm a <span class="typing-text"></span><span class="cursor">|</span></h2>
+                
+                <p class="description">
+                    I build robust and scalable applications. Experienced in HTML, CSS, JavaScript, and bringing modern designs to life with clean, efficient code. Let's create something amazing together.
+                </p>
+
+                <div class="social-icons">
+                    <a href="https://github.com/PrakatheeshWaran2105/project"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/prakatheesh-waran-r-cse-95a9a7248/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/_praka_theesh21/"><i class="fab fa-instagram"></i></a>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="#contact" class="btn btn-primary">Hire Me</a>
+                    <a href="#projects" class="btn btn-outline">View Work</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-item">
+                <div class="stat-number">2+</div>
+                <div class="stat-text">Internships<br>Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">5+</div>
+                <div class="stat-text">Projects<br>Built</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-text">Technologies<br>Mastered</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-text">Commitment to<br>Quality</div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">About <span>Me</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I am a dedicated Fullstack Developer based in Salem, Tamil Nadu, with a B.E. in Computer Science and Engineering. My journey in tech has been driven by a passion for creating seamless, user-centric web applications.
+                    </p>
+                    <p>
+                        With hands-on internship experience at Shiash Info Solutions and Appin Technology, I have bridged the gap between frontend interfaces and backend logic. Beyond the code editor, I have a strong creative streak—enjoying logo design in Adobe Photoshop and exploring the skies through drone piloting.
+                    </p>
+                </div>
+                <div class="about-details">
+                    <ul>
+                        <li><strong>Degree:</strong> B.E. Computer Science (2024)</li>
+                        <li><strong>Location:</strong> Trichy, Tamil Nadu</li>
+                        <li><strong>Experience:</strong> Fullstack & Web Dev Internships</li>
+                        <li><strong>Freelance:</strong> Available</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">My <span>Skills</span></h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>Frontend Dev</h3>
+                    <p>Crafting responsive layouts with HTML, CSS, and modern JavaScript.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-server"></i>
+                    <h3>Backend Dev</h3>
+                    <p>Building robust server-side architecture and API integrations.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-palette"></i>
+                    <h3>UI & Design</h3>
+                    <p>Creating engaging visuals and logos using Adobe Photoshop.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>Drone Piloting</h3>
+                    <p>Precision flying and aerial perspective capturing.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Featured <span>Projects</span></h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Human Interview Interaction System</h3>
+                        <p>An interactive platform utilizing advanced speech-to-text and text-to-speech modules to simulate and evaluate real-time interview scenarios.</p>
+                        <div class="tech-stack">
+                            <span>JavaScript</span>
+                            <span>Speech API</span>
+                            <span>HTML/CSS</span>
+                        </div>
+                        <a href="#" class="btn btn-outline" style="padding: 5px 15px;">View Details</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-img-placeholder">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <div class="project-info">
+                        <h3>Packing Management System</h3>
+                        <p>A comprehensive logistics solution featuring real-time shipment tracking, inventory management, and streamlined order processing.</p>
+                        <div class="tech-stack">
+                            <span>Fullstack</span>
+                            <span>Database</span>
+                            <span>Tracking API</span>
+                        </div>
+                        <a href="#" class="btn btn-outline" style="padding: 5px 15px;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">Get In <span>Touch</span></h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Let's talk about everything!</h3>
+                    <p>Looking for a developer to join your team? Feel free to reach out to me.</p>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Salem, Tamil Nadu, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>your.email@example.com</span>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <textarea rows="5" placeholder="How can I help you?" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const textArray = ["Fullstack Developer", "Web Developer", "UI/UX Designer"];
+        const typingDelay = 100;
+        const erasingDelay = 50;
+        const newTextDelay = 2000;
+        let textArrayIndex = 0;
+        let charIndex = 0;
+
+        const typedTextSpan = document.querySelector(".typing-text");
+
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } else {
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, typingDelay + 1100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (textArray.length) setTimeout(type, newTextDelay + 250);
+        });
+    </script>
+</body>
+</html>
